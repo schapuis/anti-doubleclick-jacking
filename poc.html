@@ -41,19 +41,13 @@
     </script>
 </head>
 <body style='font-family:"Arial", sans-serif;background-color: #d0a1a1;'>
-
     <h1>PoC - Demonstration page</h1>
     <p>This page is used to demonstrate a double clickjacking attack. This page is hosted by the hacker (background red).</p>
-
     <p>Below, you will find 2 demonstration buttons.</p>
-
     <p>The first demonstrates a situation where the website (background blue) is not protected against double clickjacking.</p>
-
     <p>The second, the website (background blue) is protected using the technique of disabling the button by default and/or add layer protect.</p>
     <hr>
-    <!-- Replace value's below with the URL and top, left, width, height of a button you want to doublejack with -->
     <input type="button" onclick="openDoubleWindow('hack.php?user=hacked@email.hack&protect=false',250, 400, 150, 30)" value="Start Demo Without Protection" style="cursor: pointer;"><br><br>
     <input type="button" onclick="openDoubleWindow('hack.php?user=hacked@email.hack&protect=bexxo',250, 400, 150, 30)" value="Start Demo With Full Protection Website" style="cursor: pointer;">
-
 </body>
 </html>

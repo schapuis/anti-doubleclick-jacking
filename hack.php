@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Protection de la page active contre le doubleclickjacking -->
     <?php if (isset($_GET["protect"]) && $_GET["protect"]=="bexxo") { ?>
         <script src="antidoubleclick.js"></script>
         <script>
-            // Exemple : distance de 50px, temps de 3000, overlay affiché d'entrée, couleur gris clair
             initOverlayBlock({
                 distance: 50,
                 time: 3000,
