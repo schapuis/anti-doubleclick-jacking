@@ -50,7 +50,7 @@ A JavaScript utility to protect web pages from doubleclicks jacking by introduci
 ---
 
 ## License
-Copyright : (c) 2025, bexxo.ch Author : bexxo.ch License : MIT License
+Copyright : (c) 2025, bexxo.ch Author : www.bexxo.ch License : MIT License
 
 ---
 
